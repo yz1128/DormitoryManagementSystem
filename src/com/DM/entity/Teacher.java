@@ -5,7 +5,7 @@ public class Teacher {
     private String Password;
     private String Name;
     private String Gender;
-    private int Age;
+    private String Age;
     private String Contact;
     private String Department;
 
@@ -41,11 +41,11 @@ public class Teacher {
         Gender = gender;
     }
 
-    public int getAge() {
+    public String getAge() {
         return Age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         Age = age;
     }
 

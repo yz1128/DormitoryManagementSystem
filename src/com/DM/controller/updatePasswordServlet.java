@@ -1,7 +1,7 @@
 package com.DM.controller;
 
-import com.Web.entity.vo.MessageModel;
-import com.Web.service.UserService;
+import com.DM.service.TeacherService;
+import com.DM.entity.vo.MessageModel;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet(name = "updatePasswordServlet", value = "/updatePasswordServlet")
 public class updatePasswordServlet extends HttpServlet {
-    public UserService userService = new UserService();
+    public TeacherService teacherService = new TeacherService();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -26,14 +26,14 @@ public class updatePasswordServlet extends HttpServlet {
         String newUserPassword1 = request.getParameter("newUserPassword1");
         String newUserPassword2 = request.getParameter("newUserPassword2");
         //调用userService进行数据库的修改
-        MessageModel messageModel = userService.updatePassword(userName,userPassword,newUserPassword1,newUserPassword2);
+        MessageModel messageModel = teacherService.updatePassword(userName,userPassword,newUserPassword1,newUserPassword2);
 
         // 判断消息模型状态码
         if (messageModel.getCode() == 1) { // 修改成功
             request.setAttribute("messageModel", messageModel);
             // 将用户信息存储到session中
             HttpSession session = request.getSession();
-            session.setAttribute("user", messageModel.getObject());
+            session.setAttribute("teacher", messageModel.getObject());
             // 重定向到用户信息界面
             response.sendRedirect("updatePassword.jsp"); // 改动：直接重定向到用户信息的JSP页面
         } else { // 修改失败

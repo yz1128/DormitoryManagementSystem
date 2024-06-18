@@ -1,7 +1,8 @@
 package com.DM.controller;
 
-import com.Web.entity.vo.MessageModel;
-import com.Web.service.UserService;
+import com.DM.entity.Teacher;
+import com.DM.entity.vo.MessageModel;
+import com.DM.service.TeacherService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class registerServlet extends HttpServlet {
 
     // 实例化UserService对象
-    private UserService userService = new UserService();
+    private TeacherService teacherService = new TeacherService();
 
 
     /**
@@ -36,15 +37,17 @@ public class registerServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         //1.接收客户端的请求（接受参数：姓名、密码）
-        String userName = request.getParameter("userName");
-        String userPassword = request.getParameter("userPassword");
-        String ConfirmPassword = request.getParameter("ConfirmPassword");
-        String userEmail = request.getParameter("userEmail");
-        String userAddress = request.getParameter("userAddress");
-        String userPhone = request.getParameter("userPhone");
+        String teacherID = request.getParameter("TeacherID");
+        String password = request.getParameter("Password");
+        String name = request.getParameter("Name");
+        String gender = request.getParameter("Gender");
+        String age = request.getParameter("Age");
+        String contact = request.getParameter("Contact");
+        String department = request.getParameter("Department");
+
 
         //２.调用service层的方法，返回消息模型对象
-        MessageModel messageModel = userService.userRegister(userName,userPassword,ConfirmPassword,userEmail,userAddress,userPhone);
+        MessageModel messageModel = teacherService.TeacherRegister(teacherID, password, name, gender, age, contact, department);
         //3.判断消息模型状态码
         if (messageModel.getCode() == 1) {//成功
             //将消息模型中的用户信息设置到session作用域中，重定向跳转到login.jsp

@@ -16,7 +16,7 @@
                     </tr>
                     <tr>
                         <td class="right"><label for="Name">教工号：</label> </td>
-                        <td><input type="text" name="TeacherID" id="TeacherID" value="${messageModel.object.Name}"> </td>
+                        <td><input type="text" name="TeacherID" id="TeacherID" value="${messageModel.object.TeacherID}"> </td>
                         <td></td>
                     </tr>
                     <tr><!--label 标签的作用是当点击文字也会跳到文本输出框-->
