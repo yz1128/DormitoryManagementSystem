@@ -63,7 +63,7 @@
 <body>
 
 <div id="wrapper">
-
+    <% int teacherID = 0; %>
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -81,9 +81,10 @@
                 </li>
                 <li>
                     <a href="#">居住记录</a>
+                    <!-- TODO(Yanz,2024/6/20 上午12:26): -->写居住记录
                 </li>
                 <li>
-                    <a href="checkinrecords.jsp">报修查询</a>
+                    <a href="maintenancerecords.jsp?teacherID=<%=teacherID%>">报修查询</a>
                 </li>
                 <li>
                     <a href="#">About</a>
@@ -101,12 +102,18 @@
 <!-- /#wrapper -->
 
 <%
+
     Teacher teacher = (Teacher) session.getAttribute("teacher");
     String Name = teacher != null ? teacher.getName() : "";
+    String teacherIDStr = teacher != null ? teacher.getTeacherID() : "";
+    // 如果teacherIDStr不为空，则尝试将其转换为整数
+    if (!teacherIDStr.isEmpty()) {
+        teacherID = Integer.parseInt(teacherIDStr);
+    }
 %>
 <script>
     $(document).ready(function () {
-        var Name = '<%= Name %>'; // 将用户名传递给 JavaScript 变量
+        var Name = '<%=Name%>'; // 将用户名传递给 JavaScript 变量
         if (Name) {
             $("#TeacherInfo").text(Name); // 更新导航栏中的用户名
             $("#logout:contains('退出')").show(); // 显示退出按钮

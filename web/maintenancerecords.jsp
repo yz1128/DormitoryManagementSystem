@@ -17,7 +17,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <div id="notification-container">
+            <div id="maintenancerecord-container">
 
             </div>
         </div>
@@ -25,37 +25,44 @@
 </div>
 <!-- 底部信息 -->
 <%@include file="footer.jsp" %>
+
 <script>
     $(document).ready(function() {
         // 发起 AJAX 请求获取通知数据
         $.ajax({
             type: "POST",
-            url: "NotificationDataServlet",
+            url: "selectMRByIDServlet?teacherID=<%= teacherID %>",
             dataType: "json",
             success: function (data) {
                 // 成功获取数据后，更新页面内容
-                var notifications = data; // 假设返回的数据是通知对象数组
-                var container = $("#notification-container");
+                var maintenancerecords = data; // 假设返回的数据是通知对象数组
+                var container = $("#maintenancerecord-container");
                 container.empty(); // 清空容器
 
                 // 创建表格元素
                 var table = "<table style='width: 100%; border-collapse: collapse;'>" +
                     "<thead>" +
                     "<tr>" +
-                    "<th style='border: 1px solid #ddd; padding: 8px;'>Title</th>" +
-                    "<th style='border: 1px solid #ddd; padding: 8px;'>Content</th>" +
-                    "<th style='border: 1px solid #ddd; padding: 8px;'>Date</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>记录编号</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>宿舍编号</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>内容</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>报告日期</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>维修日期</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>状态</th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tbody>";
 
                 // 遍历通知数据，生成表格行并添加到表格中
-                for (var i = 0; i < notifications.length; i++) {
-                    var notification = notifications[i];
+                for (var i = 0; i < maintenancerecords.length; i++) {
+                    var record = maintenancerecords[i];
                     table += "<tr>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.title + "</td>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.content + "</td>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.date + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.recordID + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.dormID + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.content + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.reportDate + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.maintenanceDate + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.status + "</td>" +
                         "</tr>";
                 }
 
@@ -63,6 +70,9 @@
 
                 // 添加表格到容器
                 container.append(table);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX请求出错:", error);
             }
         })
     })

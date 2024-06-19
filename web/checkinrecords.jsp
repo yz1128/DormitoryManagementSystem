@@ -32,14 +32,14 @@
 
 
 <!-- 底部信息 -->
-<%@include file="footer.jsp" %>
+<%@include file="footer.jsp" %>\
+<!-- TODO(Yanz,2024/6/20 上午12:26): -->完善checkirecords居住记录
 <script>
     $(document).ready(function() {
         // 发起 AJAX 请求获取通知数据
         $.ajax({
             type: "POST",
-            url: "NotificationDataServlet",
-            data: {teacherID: teacherID},
+            url: "    ",
             dataType: "json",
             success: function (data) {
                 // 成功获取数据后，更新页面内容
@@ -59,12 +59,12 @@
                     "<tbody>";
 
                 // 遍历通知数据，生成表格行并添加到表格中
-                for (var i = 0; i < notifications.length; i++) {
-                    var notification = notifications[i];
+                for (var i = 0; i < checkinrecords.length; i++) {
+                    var checkinrecord = checkinrecords[i];
                     table += "<tr>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.title + "</td>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.content + "</td>" +
-                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + notification.date + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + checkinrecord.title + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + checkinrecord.content + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" + checkinrecord.date + "</td>" +
                         "</tr>";
                 }
 
