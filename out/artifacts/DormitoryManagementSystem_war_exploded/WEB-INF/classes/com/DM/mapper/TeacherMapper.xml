@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
+<mapper namespace="com.DM.mapper.TeacherMapper">
+    <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
+    <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
+    <select id="queryTeacherByID" parameterType="String" resultType="com.DM.entity.Teacher">
+        select * from teachers where TeacherID = #{TeacherID}
+    </select>
+
+    <insert id="insertTeacher" parameterType="com.DM.entity.User">
+        INSERT INTO teachers (TeacherID,Password,Name,Gender,Age,Contact,Department)
+        VALUES (#{TeacherID}, #{Password}, #{Name}, #{Gender},#{Age},#{Contact},#{Department})
+    </insert>
+
+    <update id="updateTeacherPassword" parameterType="com.DM.entity.User">
+        UPDATE teachers
+        SET Password = #{newPassword1}
+        WHERE TeacherID = #{TeacherID};
+    </update>
+
+
+
+</mapper>

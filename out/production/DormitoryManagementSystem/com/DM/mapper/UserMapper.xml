@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DM.mapper.UserMapper">
+    <select id="queryUserByName" parameterType="String" resultType="com.DM.entity.User">
+        select * from users where userName = #{userName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.DM.entity.User">
+        INSERT INTO users (UserID,Username, Password, Name, Contact)
+        VALUES (#{userID},#{username}, #{userPassword}, #{userName}, #{contact})
+    </insert>
+
+    <update id="updateUserPassword" parameterType="com.DM.entity.User">
+        UPDATE users
+        SET Password = #{newPassword1}
+        WHERE UserID = #{UserID};
+    </update>
+
+
+
+</mapper>
