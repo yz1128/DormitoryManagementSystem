@@ -22,6 +22,10 @@
     </environments>
     <!-- mappers映射器 -->
     <mappers>
-        <mapper resource="com/Web/mapper/UserMapper.xml"/>
+        <mapper resource="com/DM/mapper/UserMapper.xml"/>
+        <mapper resource="com/DM/mapper/TeacherMapper.xml"/>
+        <mapper resource="com/DM/mapper/DormitoryMapper.xml"/>
+        <mapper resource="com/DM/mapper/NotificationMapper.xml"/>
+        <mapper resource="com/DM/mapper/MaintenanceRecordMapper.xml"/>
     </mappers>
 </configuration>

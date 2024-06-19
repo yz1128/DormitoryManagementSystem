@@ -4,52 +4,52 @@ package com.DM.entity;
  * User实体类
  */
 public class User {
-    private int UserID;
-    private String UserName;
-    private String UserPassword;
-    private String ConfirmPassword;
-    private String Contact;
+    private int userID;
+    private String userName;
+    private String password;
+    private String confirmPassword;
+    private String contact;
     private String newUserPassword1;
     private String newUserPassword2;
 
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(int userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return UserPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getConfirmPassword() {
-        return ConfirmPassword;
+        return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        ConfirmPassword = confirmPassword;
+        this.confirmPassword = confirmPassword;
     }
 
     public String getContact() {
-        return Contact;
+        return contact;
     }
 
     public void setContact(String contact) {
-        Contact = contact;
+        this.contact = contact;
     }
 
     public String getNewUserPassword1() {

@@ -1,6 +1,5 @@
 package com.DM.controller;
 
-import com.DM.entity.Teacher;
 import com.DM.entity.vo.MessageModel;
 import com.DM.service.TeacherService;
 
@@ -37,13 +36,13 @@ public class registerServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         //1.接收客户端的请求（接受参数：姓名、密码）
-        String teacherID = request.getParameter("TeacherID");
-        String password = request.getParameter("Password");
-        String name = request.getParameter("Name");
-        String gender = request.getParameter("Gender");
-        String age = request.getParameter("Age");
-        String contact = request.getParameter("Contact");
-        String department = request.getParameter("Department");
+        String teacherID = request.getParameter("teacherID");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String gender = request.getParameter("gender");
+        String age = request.getParameter("age");
+        String contact = request.getParameter("contact");
+        String department = request.getParameter("department");
 
 
         //２.调用service层的方法，返回消息模型对象
@@ -51,7 +50,7 @@ public class registerServlet extends HttpServlet {
         //3.判断消息模型状态码
         if (messageModel.getCode() == 1) {//成功
             //将消息模型中的用户信息设置到session作用域中，重定向跳转到login.jsp
-            request.getSession().setAttribute("user", messageModel.getObject());
+            request.getSession().setAttribute("teacher", messageModel.getObject());
             response.sendRedirect("login.jsp");
         } else {//失败
             //将消息模型对象设置到request作用域中，请求转发跳转到login.jsp
@@ -59,5 +58,4 @@ public class registerServlet extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
-
 }

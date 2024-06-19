@@ -1,49 +1,49 @@
 package com.DM.entity;
 
 public class Notification {
-    private int NotificationID;
-    private int UserID;
-    private String Title;
-    private String Content;
-    private String Date;
+    private int notificationID;
+    private int userID;
+    private String title;
+    private String content;
+    private String date;
 
     public int getNotificationID() {
-        return NotificationID;
+        return notificationID;
     }
 
     public void setNotificationID(int notificationID) {
-        NotificationID = notificationID;
+        this.notificationID = notificationID;
     }
 
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(int userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-        Content = content;
+        this.content = content;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 }

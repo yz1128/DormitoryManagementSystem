@@ -8,17 +8,17 @@ import com.DM.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
 public class TeacherService {
-    public MessageModel TeacherLogin(String TeacherID, String Password) {
+    public MessageModel TeacherLogin(String teacherID, String password) {
         MessageModel messageModel = new MessageModel();
 
         //回显数据
         Teacher t = new Teacher();
-        t.setTeacherID(TeacherID);
-        t.setPassword(Password);
+        t.setTeacherID(teacherID);
+        t.setPassword(password);
         messageModel.setObject(t);
 
         // 1. 参数的非空判断
-        if (StringUtil.isEmpty(TeacherID) || StringUtil.isEmpty(Password)) {
+        if (StringUtil.isEmpty(teacherID) || StringUtil.isEmpty(password)) {
             //将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
             messageModel.setCode(0);
             messageModel.setMsg("用户姓名和密码不能为空！");
@@ -29,7 +29,7 @@ public class TeacherService {
         try {
 
             TeacherMapper teacherMapper = session.getMapper(TeacherMapper.class);
-            Teacher teacher = teacherMapper.queryTeacherByID(TeacherID);
+            Teacher teacher = teacherMapper.queryTeacherByID(teacherID);
             // 3.判断用户对象是否为空
             if (teacher == null) {
                 messageModel.setCode(0);
@@ -38,7 +38,7 @@ public class TeacherService {
             }
 
             // 4.判断数据库中查询到的用户密码与前台传递的密码作比较
-            if (!Password.equals(teacher.getPassword())) {
+            if (!password.equals(teacher.getPassword())) {
                 messageModel.setCode(0);
                 messageModel.setMsg("用户密码不正确！");
                 return messageModel;
@@ -60,23 +60,24 @@ public class TeacherService {
         }
         return messageModel;
     }
-    public MessageModel TeacherRegister(String TeacherID, String Password, String Name,String Gender,String Age,String Contact,String Department) {
+    public MessageModel TeacherRegister(String teacherID, String password, String name,String gender,String age,String contact,String department) {
         MessageModel messageModel = new MessageModel();
 
         //回显数据
-        Teacher t = new Teacher();
-        t.setTeacherID(TeacherID);
-        t.setPassword(Password);
-        t.setName(Name);
-        t.setGender(Gender);
-        t.setAge(Age);
-        t.setContact(Contact);
-        t.setDepartment(Department);
-        messageModel.setObject(t);
+        Teacher teacher = new Teacher();
+        teacher.setTeacherID(teacherID);
+        teacher.setPassword(password);
+        teacher.setName(name);
+        teacher.setGender(gender);
+        teacher.setAge(age);
+        teacher.setContact(contact);
+        teacher.setDepartment(department);
+        messageModel.setObject(teacher);
 
         // 1. 检查输入的必填字段是否为空
-        if (StringUtil.isEmpty(TeacherID) || StringUtil.isEmpty(Password) || StringUtil.isEmpty(Name) || StringUtil.isEmpty(Gender) || StringUtil.isEmpty(Age) || StringUtil.isEmpty(Contact) || StringUtil.isEmpty(Department)) {
+        if (StringUtil.isEmpty(teacherID) || StringUtil.isEmpty(password) || StringUtil.isEmpty(name) || StringUtil.isEmpty(gender) || StringUtil.isEmpty(age) || StringUtil.isEmpty(contact) || StringUtil.isEmpty(department)) {
             messageModel.setCode(0);
+            System.out.println("teacherID = " + teacherID + ", password = " + password + ", name = " + name + ", gender = " + gender + ", age = " + age + ", contact = " + contact + ", department = " + department);
             messageModel.setMsg("注册信息不能为空！");
             return messageModel;
         }
@@ -84,13 +85,13 @@ public class TeacherService {
         SqlSession session = GetSqlSession.createSqlSession();
         try {
             TeacherMapper teacherMapper = session.getMapper(TeacherMapper.class);
-            Teacher existingTeacher = teacherMapper.queryTeacherByID(TeacherID);
+            Teacher existingTeacher = teacherMapper.queryTeacherByID(teacherID);
             if (existingTeacher != null) {
                 messageModel.setCode(0);
                 messageModel.setMsg("教工号已被注册！");
                 return messageModel;
             }
-            int rowsAffected = teacherMapper.insertTeacher(t);
+            int rowsAffected = teacherMapper.insertTeacher(teacher);
             if (rowsAffected > 0) {
                 messageModel.setCode(1);
                 messageModel.setMsg("注册成功！");
@@ -108,12 +109,12 @@ public class TeacherService {
         }
         return messageModel;
     }
-    public MessageModel updatePassword(String TeacherID, String currentPassword, String newPassword1, String newPassword2) {
+    public MessageModel updatePassword(String teacherID, String currentPassword, String newPassword1, String newPassword2) {
         MessageModel messageModel = new MessageModel();
 
         // 回显数据
         Teacher teacher = new Teacher();
-        teacher.setTeacherID(TeacherID);
+        teacher.setTeacherID(teacherID);
         teacher.setPassword(currentPassword);
         messageModel.setObject(teacher);
 
@@ -128,7 +129,7 @@ public class TeacherService {
         SqlSession session = GetSqlSession.createSqlSession();
         try {
             TeacherMapper teacherMapper = session.getMapper(TeacherMapper.class);
-            Teacher existingTeacher = teacherMapper.queryTeacherByID(TeacherID);
+            Teacher existingTeacher = teacherMapper.queryTeacherByID(teacherID);
 
             // 3. 判断数据库中查询到的教师密码与当前密码作比较
             if (!currentPassword.equals(existingTeacher.getPassword())) {

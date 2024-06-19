@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(mapper)层接口 -->
 <mapper namespace="com.DM.mapper.UserMapper">
-    <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
-    <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
     <select id="queryUserByName" parameterType="String" resultType="com.DM.entity.User">
         select * from users where userName = #{userName}
     </select>
 
     <insert id="insertUser" parameterType="com.DM.entity.User">
-        INSERT INTO users (UserID,userName, Password, Name, Contact)
-        VALUES (#{UserID},#{userName}, #{userPassword}, #{Name}, #{Contact})
+        INSERT INTO users (UserID,Username, Password, Name, Contact)
+        VALUES (#{userID},#{username}, #{userPassword}, #{userName}, #{contact})
     </insert>
 
     <update id="updateUserPassword" parameterType="com.DM.entity.User">

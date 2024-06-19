@@ -1,49 +1,49 @@
 package com.DM.entity;
 
 public class CheckInRecord {
-    private int RecordID;
-    private int TeacherID;
-    private String DormID;
-    private String CheckInDate;
-    private String CheckOutDate;
+    private int recordID;
+    private int teacherID;
+    private String dormID;
+    private String checkInDate;
+    private String checkOutDate;
 
     public int getRecordID() {
-        return RecordID;
+        return recordID;
     }
 
     public void setRecordID(int recordID) {
-        RecordID = recordID;
+        this.recordID = recordID;
     }
 
     public int getTeacherID() {
-        return TeacherID;
+        return teacherID;
     }
 
     public void setTeacherID(int teacherID) {
-        TeacherID = teacherID;
+        this.teacherID = teacherID;
     }
 
     public String getDormID() {
-        return DormID;
+        return dormID;
     }
 
     public void setDormID(String dormID) {
-        DormID = dormID;
+        this.dormID = dormID;
     }
 
     public String getCheckInDate() {
-        return CheckInDate;
+        return checkInDate;
     }
 
     public void setCheckInDate(String checkInDate) {
-        CheckInDate = checkInDate;
+        this.checkInDate = checkInDate;
     }
 
     public String getCheckOutDate() {
-        return CheckOutDate;
+        return checkOutDate;
     }
 
     public void setCheckOutDate(String checkOutDate) {
-        CheckOutDate = checkOutDate;
+        this.checkOutDate = checkOutDate;
     }
 }

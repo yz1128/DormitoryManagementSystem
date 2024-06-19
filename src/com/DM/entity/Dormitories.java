@@ -1,49 +1,49 @@
 package com.DM.entity;
 
-public class Dormitorie {
-    private String DormID;
-    private String BuildingNumber;
-    private int Floor;
-    private int Rooms;
-    private String Status;
+public class Dormitories {
+    private String dormID;
+    private String buildingNumber;
+    private int floor;
+    private int rooms;
+    private String status;
 
     public String getDormID() {
-        return DormID;
+        return dormID;
     }
 
     public void setDormID(String dormID) {
-        DormID = dormID;
+        this.dormID = dormID;
     }
 
     public String getBuildingNumber() {
-        return BuildingNumber;
+        return buildingNumber;
     }
 
     public void setBuildingNumber(String buildingNumber) {
-        BuildingNumber = buildingNumber;
+        this.buildingNumber = buildingNumber;
     }
 
     public int getFloor() {
-        return Floor;
+        return floor;
     }
 
     public void setFloor(int floor) {
-        Floor = floor;
+        this.floor = floor;
     }
 
     public int getRooms() {
-        return Rooms;
+        return rooms;
     }
 
     public void setRooms(int rooms) {
-        Rooms = rooms;
+        this.rooms = rooms;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 }

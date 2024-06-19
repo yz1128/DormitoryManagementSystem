@@ -11,17 +11,17 @@ import org.apache.ibatis.session.SqlSession;
  * 业务逻辑
  */
 public class UserService {
-    public MessageModel userLogin(String userName, String Password) {
+    public MessageModel userLogin(String userName, String password) {
         MessageModel messageModel = new MessageModel();
 
         //回显数据
-        User u = new User();
-        u.setUserName(userName);
-        u.setUserPassword(Password);
-        messageModel.setObject(u);
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        messageModel.setObject(user);
 
         // 1. 参数的非空判断
-        if (StringUtil.isEmpty(userName) || StringUtil.isEmpty(Password)) {
+        if (StringUtil.isEmpty(userName) || StringUtil.isEmpty(password)) {
             //将状态码、提示信息、回想数据设置到消息模型中，返回消息模型对象
             messageModel.setCode(0);
             messageModel.setMsg("用户姓名和密码不能为空！");
@@ -32,22 +32,22 @@ public class UserService {
         try {
 
             UserMapper userMapper = session.getMapper(UserMapper.class);
-            User user = userMapper.queryUserByName(userName);
+            User user1 = userMapper.queryUserByName(userName);
             // 3.判断用户对象是否为空
-            if (user == null) {
+            if (user1 == null) {
                 messageModel.setCode(0);
                 messageModel.setMsg("用户不存在！");
                 return messageModel;
             }
 
             // 4.判断数据库中查询到的用户密码与前台传递的密码作比较
-            if (!Password.equals(user.getUserPassword())) {
+            if (!password.equals(user1.getPassword())) {
                 messageModel.setCode(0);
                 messageModel.setMsg("用户密码不正确！");
                 return messageModel;
             }
             // 登录成功，将用户信息设置到消息模型中
-            messageModel.setObject(user);
+            messageModel.setObject(user1);
             messageModel.setCode(1);
             messageModel.setMsg("登录成功！");
         } catch (Exception e) {

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/table.css">
 </head>
 <body style="background-color: #E8E1DF;">
-    <%@include file="sidebar.jsp"%>
+    <%@include file="ADsidebar.jsp"%>
     <div id="wrapper">
     <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -14,16 +14,16 @@
                 <div class="center">
                     <br><br><br>
                     <br><br><br>
-                    <form class="form"  action="login" method="post" id="loginForm">
+                    <form class="form"  action="ADlogin" method="post" id="loginForm">
                         <table class="table">
                             <tr>
                                 <td></td>
-                                <td><h2>用户登录</h2></td>
+                                <td><h2>管理员登录</h2></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td class="right"><label for="teacherID">教工号：</label> </td>
-                                <td><input type="text" name="teacherID" id="teacherID" value="${messageModel.object.teacherID}"> </td>
+                                <td class="right"><label for="userName">账号：</label> </td>
+                                <td><input type="text" name="userName" id="userName" value="${messageModel.object.userName}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -40,13 +40,6 @@
                                 <td></td>
                                 <td>
                                     <button type="button" id="loginBtn">立即登录&nbsp;&nbsp;</button>
-                                    <a style="font-size: 12px" href="updatePassword.jsp">忘记密码</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    没有账号?<a href="register.jsp">&nbsp;注册</a>
                                 </td>
                             </tr>
                         </table>
@@ -75,12 +68,12 @@
      */
     $("#loginBtn").click(function () {
         //获取用户姓名和密码的值
-        var teacherID = $("#teacherID").val();
+        var userName = $("#userName").val();
         var password = $("#password").val();
         //判断姓名是否为空
-        if (isEmpty(teacherID)){
+        if (isEmpty(userName)){
             //如果姓名为空，提示用户（span标签赋值），并且return html()
-            $("#msg").html("教工号不可为空！")
+            $("#msg").html("账号不可为空！")
             return;
         }
         //判断密码是否为空
