@@ -12,7 +12,12 @@
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
-
+<%
+    if (session.getAttribute("teacher") == null) {
+        // 如果 session 不存在或者教工数据为空，则重定向到 login.jsp 页面
+        response.sendRedirect("login.jsp");
+    }
+%>
 <div id="wrapper">
     <!-- Page Content -->
     <div id="page-content-wrapper">

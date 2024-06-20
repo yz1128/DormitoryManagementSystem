@@ -27,5 +27,6 @@
         <mapper resource="com/DM/mapper/DormitoryMapper.xml"/>
         <mapper resource="com/DM/mapper/NotificationMapper.xml"/>
         <mapper resource="com/DM/mapper/MaintenanceRecordMapper.xml"/>
+        <mapper resource="com/DM/mapper/CheckInRecordMapper.xml"/>
     </mappers>
 </configuration>
