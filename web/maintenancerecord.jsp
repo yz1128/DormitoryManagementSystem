@@ -8,11 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人居住记录</title>
+    <title>报修查询</title>
 </head>
 <body>
 <%@include file="sidebar.jsp"%>
-
+<%
+    if (session.getAttribute("teacher") == null) {
+        // 如果 session 不存在或者教工数据为空，则重定向到 login.jsp 页面
+        response.sendRedirect("login.jsp");
+    }
+%>
 <div id="wrapper">
     <!-- Page Content -->
     <div id="page-content-wrapper">

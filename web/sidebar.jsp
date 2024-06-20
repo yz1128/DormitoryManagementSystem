@@ -33,13 +33,6 @@
     <!-- Custom CSS -->
     <link href="css/sidebar.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <style media="screen">
         /*body { padding-top: 70px; }*/
         #connectLogo {
@@ -80,11 +73,10 @@
                     <a href="notification.jsp">通知查看</a>
                 </li>
                 <li>
-                    <a href="#">居住记录</a>
-                    <!-- TODO(Yanz,2024/6/20 上午12:26): -->写居住记录
+                    <a href="checkinrecord.jsp">居住记录</a>
                 </li>
                 <li>
-                    <a href="maintenancerecords.jsp?teacherID=<%=teacherID%>">报修查询</a>
+                    <a href="maintenancerecord.jsp">报修查询</a>
                 </li>
                 <li>
                     <a href="#">About</a>

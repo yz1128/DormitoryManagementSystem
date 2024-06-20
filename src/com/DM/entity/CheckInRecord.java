@@ -6,6 +6,15 @@ public class CheckInRecord {
     private String dormID;
     private String checkInDate;
     private String checkOutDate;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getRecordID() {
         return recordID;
