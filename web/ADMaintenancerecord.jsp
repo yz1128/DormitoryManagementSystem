@@ -11,11 +11,11 @@
     <title>报修查询</title>
 </head>
 <body>
-<%@include file="sidebar.jsp"%>
+<%@include file="ADsidebar.jsp"%>
 <%
-    if (session.getAttribute("teacher") == null) {
-        // 如果 session 不存在或者教工数据为空，则重定向到 login.jsp 页面
-        response.sendRedirect("login.jsp");
+    if (session.getAttribute("user") == null) {
+        // 如果 session 不存在或者管理员数据为空，则重定向到 ADlogin.jsp 页面
+        response.sendRedirect("ADlogin.jsp");
     }
 %>
 <div id="wrapper">
@@ -87,7 +87,7 @@
         // 发起 AJAX 请求获取通知数据
         $.ajax({
             type: "POST",
-            url: "selectMRByIDServlet?teacherID=<%= teacherID %>",
+            url: "selectMRServlet",
             dataType: "json",
             success: function (data) {
                 // 成功获取数据后，更新页面内容
@@ -105,6 +105,7 @@
                     "<th style='border: 1px solid #ddd; padding: 8px;'>报告日期</th>" +
                     "<th style='border: 1px solid #ddd; padding: 8px;'>维修日期</th>" +
                     "<th style='border: 1px solid #ddd; padding: 8px;'>状态</th>" +
+                    "<th style='border: 1px solid #ddd; padding: 8px;'>操作</th>" +
                     "</tr>" +
                     "</thead>" +
                     "<tbody>";
@@ -119,6 +120,10 @@
                         "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.reportDate + "</td>" +
                         "<td style='border: 1px solid #ddd; padding: 8px;'>" + (record.maintenanceDate ? record.maintenanceDate : "") + "</td>" +
                         "<td style='border: 1px solid #ddd; padding: 8px;'>" + record.status + "</td>" +
+                        "<td style='border: 1px solid #ddd; padding: 8px;'>" +
+                        "<button class='delete-btn' data-recordid='" + record.recordID + "'>删除</button>" +
+                        "<button class='complete-btn' data-recordid='" + record.recordID + "'>维修完毕</button>" +
+                        "</td>" +
                         "</tr>";
                 }
 
@@ -126,6 +131,44 @@
 
                 // 添加表格到容器
                 container.append(table);
+
+                // 绑定删除按钮点击事件
+                $(".delete-btn").click(function() {
+                    var recordID = $(this).data("recordid");
+                    // 发起删除请求
+                    $.ajax({
+                        type: "POST",
+                        url: "deleteMaintenanceRecordServlet",
+                        data: { recordID: recordID },
+                        success: function(response) {
+                            // 成功删除后重新加载维护记录数据
+                            alert("删除成功");
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("删除请求出错:", error);
+                        }
+                    });
+                });
+
+                // 绑定维修完毕按钮点击事件
+                $(".complete-btn").click(function() {
+                    var recordID = $(this).data("recordid");
+                    // 发起更新状态请求
+                    $.ajax({
+                        type: "POST",
+                        url: "updateDormServlet",
+                        data: { recordID: recordID },
+                        success: function(response) {
+                            // 成功更新状态后重新加载维护记录数据
+                            location.reload();
+                            alert("维修完毕");
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("更新请求出错:", error);
+                        }
+                    });
+                });
             },
             error: function (xhr, status, error) {
                 console.error("AJAX请求出错:", error);

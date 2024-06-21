@@ -27,4 +27,22 @@ public class MaintenanceRecordService {
         }
         return messageModel;
     }
+    public MessageModel selectMaintenanceRecord() {
+        MessageModel messageModel = new MessageModel();
+        SqlSession session = GetSqlSession.createSqlSession();
+        try {
+            MaintenanceRecordMapper maintenanceRecordMapper = session.getMapper(MaintenanceRecordMapper.class);
+            List<MaintenanceRecord> maintenanceRecordList = maintenanceRecordMapper.selectMaintenanceRecord();
+            messageModel.setObject(maintenanceRecordList);
+            messageModel.setCode(1);
+            messageModel.setMsg("查询成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageModel.setCode(0);
+            messageModel.setMsg("搜索失败，发生异常：" + e.getMessage());
+        } finally {
+            session.close();
+        }
+        return messageModel;
+    }
 }

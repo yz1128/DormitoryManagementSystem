@@ -5,10 +5,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<%@include file="sidebar.jsp"%>
+<%@include file="ADsidebar.jsp"%>
 <%
-    if (session.getAttribute("teacher") == null) {
-        response.sendRedirect("login.jsp");
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("ADlogin.jsp");
     }
 %>
 <div id="wrapper">
@@ -31,7 +31,7 @@
                         </tr>
                         <tr>
                             <td class="right"><label for="teacherID">教工号：</label> </td>
-                            <td><input type="text" name="teacherID" id="teacherID" value="${teacher.teacherID}"> </td>
+                            <td><input type="text" name="teacherID" id="teacherID"> </td>
                             <td></td>
                         </tr>
                         <tr>
@@ -56,7 +56,7 @@
 <script>
     $("#add-Btn").click(function () {
         var dormID = $("#dormID").val(); // 修改这里，确保获取正确的宿舍号
-        var teacherID = '<%= teacherID %>';
+        var teacherID = $("#teacherID").val();;
 
         // 确保宿舍号和教工号不为空
         if (isEmpty(dormID)){
@@ -76,8 +76,8 @@
     }
     $(document).ready(function() {
         $.ajax({
-            type: "POST",
-            url: "selectCIRByIDServlet?teacherID=<%= teacherID %>",
+            type: "GET",
+            url: "checkInRecordsDataServlet",
             dataType: "json",
             success: function(data) {
                 var checkinrecords = data;
@@ -128,7 +128,7 @@
                         data: { recordID: recordID, checkOutDate: checkOutDate },
                         success: function(response) {
                             // Optionally update UI or reload data
-                            window.location.href = "checkinrecord.jsp";
+                            window.location.href = "ADCheckinrecord.jsp";
                         },
                         error: function(xhr, status, error) {
                             console.error(error);

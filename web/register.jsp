@@ -20,47 +20,47 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td class="right"><label for="Name">教工号：</label> </td>
-                                <td><input type="text" userName="teacherID" id="teacherID" value="${messageModel.object.teacherID}"> </td>
+                                <td class="right"><label for="teacherID">教工号：</label> </td>
+                                <td><input type="text" name="teacherID" id="teacherID" value="${messageModel.object.teacherID}"> </td>
                                 <td></td>
                             </tr>
                             <tr><!--label 标签的作用是当点击文字也会跳到文本输出框-->
                                 <!--for属性与ID属性对应规定 label 绑定到哪个表单元素。-->
-                                <td class="right"><label for="userName">姓名：</label> </td>
-                                <td><input type="text" userName="userName" id="userName" value="${messageModel.object.userName}"> </td>
+                                <td class="right"><label for="name">姓名：</label> </td>
+                                <td><input type="text" name="name" id="name" value="${messageModel.object.name}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="password">密码：</label> </td>
-                                <td><input type="password" userName="password" id="password" value="${messageModel.object.password}"> </td>
+                                <td><input type="password" name="password" id="password" value="${messageModel.object.password}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="confirmPassword">确认密码：</label> </td>
-                                <td><input type="password" userName="confirmPassword" id="confirmPassword" value="${messageModel.object.confirmPassword}"> </td>
+                                <td><input type="password" name="confirmPassword" id="confirmPassword" value="${messageModel.object.confirmPassword}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="GenderMale">性别：</label></td>
                                 <td>
-                                    <input type="radio" id="GenderMale" userName="gender" value="Male" checked="checked"><label for="GenderMale">男</label>
-                                    <input type="radio" id="GenderFemale" userName="gender" value="Female"><label for="GenderFemale">女</label>
+                                    <input type="radio" id="GenderMale" name="gender" value="Male" checked="checked"><label for="GenderMale">男</label>
+                                    <input type="radio" id="GenderFemale" name="gender" value="Female"><label for="GenderFemale">女</label>
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="age">年龄：</label> </td>
-                                <td><input type="text" userName="age" id="age" value="${messageModel.object.age}"> </td>
+                                <td><input type="text" name="age" id="age" value="${messageModel.object.age}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="contact">联系方式：</label> </td>
-                                <td><input type="text" userName="contact" id="contact" value="${messageModel.object.contact}"> </td>
+                                <td><input type="text" name="contact" id="contact" value="${messageModel.object.contact}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td class="right"><label for="department">所属院系：</label> </td>
-                                <td><input type="text" userName="department" id="department" value="${messageModel.object.department}"> </td>
+                                <td><input type="text" name="department" id="department" value="${messageModel.object.department}"> </td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -110,7 +110,7 @@
                 var teacherID = $("#teacherID").val();
                 var password = $("#password").val();
                 var confirmPassword = $("#confirmPassword").val();
-                var userName = $("#userName").val();
+                var name = $("#name").val();
                 var age = $("#age").val();
                 var contact = $("#contact").val();
                 var department = $("#department").val();
@@ -121,7 +121,7 @@
                 return;
             }
             //判断姓名是否为空
-            if (isEmpty(userName)){
+            if (isEmpty(name)){
                 //如果姓名为空，提示用户（span标签赋值），并且return html()
                 $("#msg").html("姓名不可为空！")
                 return;

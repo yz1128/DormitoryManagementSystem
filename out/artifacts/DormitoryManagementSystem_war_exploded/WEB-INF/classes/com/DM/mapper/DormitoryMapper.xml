@@ -8,6 +8,16 @@
         select * from dormitories
     </select>
 
-
+    <update id="updateDormStatus">
+        UPDATE dormitories
+        SET Status = 'Vacant'
+        WHERE DormID = #{dormID}
+    </update>
+    <update id="updateDormStatusByRecordID">
+        UPDATE dormitories d
+            JOIN checkinrecords c ON d.DormID = c.DormID
+        SET d.Status = 'Vacant'
+        WHERE c.RecordID = #{recordID}
+    </update>
 
 </mapper>

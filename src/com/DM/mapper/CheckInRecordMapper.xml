@@ -9,11 +9,16 @@
         from CheckInRecords
         WHERE teacherID = #{TeacherID};
     </select>
+    <select id="selectRecord" resultType="com.DM.entity.CheckInRecord">
+        select *
+        from CheckInRecords
+    </select>
     <update id="updateCheckOutDate">
         UPDATE CheckInRecords
         SET checkOutDate = #{checkOutDate}
         WHERE recordID = #{recordID};
     </update>
+
 
 
 </mapper>

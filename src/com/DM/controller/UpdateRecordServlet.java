@@ -17,10 +17,14 @@ public class UpdateRecordServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 设置请求和响应的编码为UTF-8
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+
         int recordID = Integer.parseInt(req.getParameter("recordID"));
-        System.out.println("recordID = " + recordID);
         String checkOutDate = req.getParameter("checkOutDate");
-        System.out.println("checkOutDate = " + checkOutDate);
+
         MessageModel messageModel = checkInRecordService.updateCheckOutDate(recordID, checkOutDate);
         resp.setContentType("application/json");
         resp.getWriter().write(new Gson().toJson(messageModel));

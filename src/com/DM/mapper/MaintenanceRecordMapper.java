@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MaintenanceRecordMapper {
     List<MaintenanceRecord> selectMaintenanceRecordByID(int teacherID);
+    List<MaintenanceRecord> selectMaintenanceRecord();
 }

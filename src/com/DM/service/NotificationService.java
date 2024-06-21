@@ -1,9 +1,7 @@
 package com.DM.service;
 
-import com.DM.entity.Dormitories;
 import com.DM.entity.Notification;
 import com.DM.entity.vo.MessageModel;
-import com.DM.mapper.DormitoryMapper;
 import com.DM.mapper.NotificationMapper;
 import com.DM.util.GetSqlSession;
 import org.apache.ibatis.session.SqlSession;

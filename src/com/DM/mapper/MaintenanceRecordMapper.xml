@@ -5,9 +5,13 @@
     <!-- id:对应Dao(mapper)层接口方法名 parameterType：指定输入类型 -->
     <!-- useGeneratedKeys="ture" 把新增加的主键赋值到自己定义的keyProperty(id)中 -->
     <select id="selectMaintenanceRecordByID" parameterType="int" resultType="com.DM.entity.MaintenanceRecord">
-        SELECT m.*
-        FROM checkinrecords c JOIN maintenancerecords m ON c.RecordID = m.RecordID
+        SELECT DISTINCT  m.*
+        FROM checkinrecords c JOIN maintenancerecords m ON c.DormID = m.DormID
         WHERE c.teacherID = #{TeacherID};
+    </select>
+    <select id="selectMaintenanceRecord" resultType="com.DM.entity.MaintenanceRecord">
+        SELECT *
+        FROM maintenancerecords
     </select>
 
 

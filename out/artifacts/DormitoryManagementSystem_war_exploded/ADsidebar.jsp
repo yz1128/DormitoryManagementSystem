@@ -19,16 +19,16 @@
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrap.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrap.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrap.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
     <link href="css/sidebar.css" rel="stylesheet">
@@ -63,6 +63,7 @@
 <body>
 
 <div id="wrapper">
+    <% int userID = 0; %>
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -77,16 +78,19 @@
                 <a id="loginID" href="ADlogin.jsp">点击登录</a>
             </li>
             <li>
-                <a href="#">通知发布</a>
+                <a href="ADNotification.jsp">通知发布</a>
             </li>
             <li>
-                <a href="#">教工管理</a>
+                <a href="ADTeacher.jsp">教工管理</a>
             </li>
             <li>
-                <a href="#">宿舍管理</a>
+                <a href="ADDormitories.jsp">宿舍管理</a>
             </li>
             <li>
-                <a href="#">报修管理</a>
+                <a href="ADCheckinrecord.jsp">居住记录</a>
+            </li>
+            <li>
+                <a href="ADMaintenancerecord.jsp">报修管理</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -106,10 +110,17 @@
 <%
     User user = (User) session.getAttribute("user");
     String userName = user != null ? user.getUserName() : "";
+    String userIDStr = "";
+    if (user != null) {
+        userIDStr = String.valueOf(user.getUserID());
+    }
+
 %>
+userID = <%= userIDStr %>;
 <script>
     $(document).ready(function () {
         var userName = '<%= userName %>'; // 将用户名传递给 JavaScript 变量
+        var userID = '<%= userIDStr %>'; // 将userID传递给 JavaScript 变量
         if (userName) {
             $("#UserInfo").text("欢迎，" + userName); // 更新导航栏中的用户名
             $("#logout:contains('退出')").show(); // 显示退出按钮
