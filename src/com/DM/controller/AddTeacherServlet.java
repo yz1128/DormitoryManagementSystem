@@ -23,6 +23,7 @@ public class AddTeacherServlet extends HttpServlet {
         response.setContentType("application/json");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         // 从请求中获取教师数据
         String teacherID = request.getParameter("teacherID");
         String password = request.getParameter("password");
@@ -40,6 +41,7 @@ public class AddTeacherServlet extends HttpServlet {
             // 连接数据库
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
+
             // 检查是否已存在相同的teacherID
             String checkSql = "SELECT * FROM teachers WHERE TeacherID = ?";
             stmt = conn.prepareStatement(checkSql);
@@ -47,32 +49,45 @@ public class AddTeacherServlet extends HttpServlet {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // 如果已经存在相同的teacherID，返回注册失败消息
-                MessageModel messageModel = new MessageModel();
-                messageModel.setMsg("如果已经存在相同的teacherID，请换一个");
-                request.setAttribute("messageModel", messageModel);
-                response.sendRedirect("ADTeacher.jsp");
-                return; // 结束请求
-            }
-            // 准备插入教师记录的SQL语句
-            String sql = "INSERT INTO teachers (TeacherID, Password, Name, Gender, Age, Contact, Department) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, teacherID);
-            stmt.setString(2, password);
-            stmt.setString(3, name);
-            stmt.setString(4, gender);
-            stmt.setString(5, age);
-            stmt.setString(6, contact);
-            stmt.setString(7, department);
+                // 如果存在相同的teacherID，更新记录
+                String updateSql = "UPDATE teachers SET Password = ?, Name = ?, Gender = ?, Age = ?, Contact = ?, Department = ? WHERE TeacherID = ?";
+                stmt = conn.prepareStatement(updateSql);
+                stmt.setString(1, password);
+                stmt.setString(2, name);
+                stmt.setString(3, gender);
+                stmt.setString(4, age);
+                stmt.setString(5, contact);
+                stmt.setString(6, department);
+                stmt.setString(7, teacherID);
+                int rowsUpdated = stmt.executeUpdate();
 
-            // 执行SQL语句
-            int rowsInserted = stmt.executeUpdate();
-
-            // 处理插入结果
-            if (rowsInserted > 0) {
-                response.sendRedirect("ADTeacher.jsp");
+                // 处理更新结果
+                if (rowsUpdated > 0) {
+                    response.sendRedirect("ADTeacher.jsp");
+                } else {
+                    response.getWriter().println("更新教工信息失败。");
+                }
             } else {
-                response.getWriter().println("添加教工失败。");
+                // 如果不存在相同的teacherID，插入新记录
+                String insertSql = "INSERT INTO teachers (TeacherID, Password, Name, Gender, Age, Contact, Department) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                stmt = conn.prepareStatement(insertSql);
+                stmt.setString(1, teacherID);
+                stmt.setString(2, password);
+                stmt.setString(3, name);
+                stmt.setString(4, gender);
+                stmt.setString(5, age);
+                stmt.setString(6, contact);
+                stmt.setString(7, department);
+
+                // 执行SQL语句
+                int rowsInserted = stmt.executeUpdate();
+
+                // 处理插入结果
+                if (rowsInserted > 0) {
+                    response.sendRedirect("ADTeacher.jsp");
+                } else {
+                    response.getWriter().println("添加教工失败。");
+                }
             }
 
         } catch (ClassNotFoundException | SQLException e) {
