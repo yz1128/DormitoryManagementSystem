@@ -7,9 +7,5 @@ import com.DM.entity.User;
  */
 public interface UserMapper {
     User queryUserByName(String userName);
-    int insertUser(User user);
-    int updateUserInfo(User user);
-    int updateUserPassword(User user);
-    int updateBalance(User user);
 
 }
