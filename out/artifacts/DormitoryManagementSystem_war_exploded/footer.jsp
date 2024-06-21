@@ -29,7 +29,7 @@
         }
     </style>
 <div class="footer">
-    <p>&copy; 2024 Online Store. All Rights Reserved.</p>
+    <p>&copy; 2024 Dormitory Management System. By Yanz</p>
 </div>
 
 

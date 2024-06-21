@@ -40,7 +40,6 @@
                                 <td></td>
                                 <td>
                                     <button type="button" id="loginBtn">立即登录&nbsp;&nbsp;</button>
-                                    <a style="font-size: 12px" href="updatePassword.jsp">忘记密码</a>
                                 </td>
                             </tr>
                             <tr>
